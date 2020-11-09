@@ -1,0 +1,20 @@
+version: "3"
+services: 
+  nodejs-container:
+    build:
+      context: test-project
+      dockerfile: .devcontainer/Dockerfile
+    volumes: 
+      - .:/workspace:cached
+    environment: 
+      TZ: "Asia/Tokyo"
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    links:
+      - "mysql-container:db"
+
+  mysql-container:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
