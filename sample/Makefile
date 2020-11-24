@@ -1,3 +1,7 @@
+.PHONY: initdb-docker
+initdb-docker:
+	mysql -u root -pexample -hdb < test.mysql
+
 .PHONY: init-db
 initdb: apply-db
 	sleep 30
